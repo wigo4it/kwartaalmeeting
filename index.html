@@ -2,93 +2,120 @@
 <html lang="en-US">
 
 <head>
-  <title>tattaTeun</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <title>tattaTeun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
 </head>
 <script crossorigin="anonymous"
-  src="https://cdn.botframework.com/botframework-webchat/latest/webchat-minimal.js"></script>  
+    src="https://cdn.botframework.com/botframework-webchat/latest/webchat-minimal.js"></script>
 <style>
-  html,
+    html,
 
-  body {
-    height: 100%;
-  }
+    body {
+        height: 100%;
+    }
 
-  body {
-    margin: 0;
-  }
+    body {
+        margin: 0;
+    }
 
-  #webchat {
-    height: 90%;
-    width: 100%;
-  }
+    #webchat {
+        height: 90%;
+        width: 100%;
+    }
 
-  img {
-    margin-top: 20px;
-    margin-left: 20px;
-  }
+    img {
+        margin-top: 20px;
+        margin-left: 20px;
+    }
 
-  p {
-    font-family: 'Raleway', sans-serif;
-    /* replace with your preferred font */
-    font-weight: bold;
-    font-size: 16PX;
-    color: #00116e;
-    margin-top: 55px;
-    margin-left: 25px;
-  }
+    p {
+        font-family: 'Raleway', sans-serif;
+        /* replace with your preferred font */
+        font-weight: bold;
+        font-size: 16PX;
+        color: #00116e;
+        margin-top: 55px;
+        margin-left: 25px;
+    }
 
-  /* rest of your styles */
+    /* rest of your styles */
 </style>
 
 </style>
 </head>
 
 <body>
-  <img src="logo.png" alt="Logo" width="200" />
+    <img src="logo.png" alt="Logo" width="200" />
 
-  <div id="webchat" role="main"></div>
-  <script>
-    (async function () {
-      
-      const res = await fetch('https://europe.webchat.botframework.com/api/tokens', { method: 'POST' });
-      const { token } = await res.json();
-  
-      const store = window.WebChat.createStore();
-  
-      window.WebChat.renderWebChat(
-        {
-          directLine: window.WebChat.createDirectLine({ secret: 'r44Hw8495k0.P6cPwNzCecp8_RttRFSuBsygBn9I5u7c_61FAGFqRFE' }),
-          store
-        },
-        document.getElementById('webchat')
-      );
-  
-      document.querySelector('#webchat > *').focus();
-  
-      // Create a custom input box
-      const inputBox = document.createElement('input');
-      inputBox.type = 'text';
-      inputBox.id = 'customInputBox';
-      document.body.appendChild(inputBox);
-  
-      // Handle the Enter key press event
-      inputBox.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-          // When Enter key is pressed, send the message with %% wrapped around it
-          store.dispatch({
-            type: 'WEB_CHAT/SEND_MESSAGE',
-            payload: { text: `%${event.target.value}%` }
-          });
-  
-          // Clear the input box
-          event.target.value = '';
-        }
-      });
-    })().catch(err => console.error(err));
-  </script>
+    <div id="webchat" role="main"></div>
+    <script>
+        (async function () {
+
+            const res = await fetch('https://europe.webchat.botframework.com/api/tokens', { method: 'POST' });
+            const { token } = await res.json();
+
+            const store = window.WebChat.createStore();
+
+            window.WebChat.renderWebChat(
+                {
+                    directLine: window.WebChat.createDirectLine({ secret: 'r44Hw8495k0.P6cPwNzCecp8_RttRFSuBsygBn9I5u7c_61FAGFqRFE' }),
+                    store,
+                    styleOptions: {
+                        hideUploadButton: true // Hide the upload button
+                        }
+                },
+                document.getElementById('webchat')
+            );
+
+            document.querySelector('#webchat > *').focus();
+
+            // Create a custom input box
+            const inputBox = document.createElement('input');
+            inputBox.type = 'text';
+            inputBox.id = 'customInputBox';
+            inputBox.style.width = '450px'; // Set the width
+            inputBox.style.height = '30px'; // Set the height
+            inputBox.style.marginLeft = '20px'; // Move the box to the right
+            document.body.appendChild(inputBox);
+
+            // Handle the Enter key press event
+            inputBox.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    let inputText = event.target.value;
+
+                    // If the input text is "performance"
+                    if (inputText.toLowerCase() === 'performance') {
+                        inputText = '#SnelSnellerSnelst';
+                    }
+                    // If the input text is "baseline"
+                    if (inputText.toLowerCase() === 'baseline') {
+                        inputText = '#BasisLol';
+                    }
+
+                    // If the input text is "functionaliteit"
+                    if (inputText.toLowerCase() === 'functionaliteit') {
+                        inputText = '#FeatureFeestje';
+                    }
+
+                    // If the input text is "performance"
+                    if (inputText.toLowerCase() === 'vitaliteit') {
+                        inputText = '#FitheidFiesta';
+                    }
+
+                    // When Enter key is pressed, send the message with %% wrapped around it
+                    store.dispatch({
+                        type: 'WEB_CHAT/SEND_MESSAGE',
+                        payload: { text: `%${inputText}%` } // Use inputText here instead of event.target.value
+                    });
+
+                    // Clear the input box
+                    event.target.value = '';
+                }
+            });
+        })().catch(err => console.error(err));
+    </script>
 </body>
 
 </html>

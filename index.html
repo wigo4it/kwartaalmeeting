@@ -55,15 +55,38 @@
       
       const res = await fetch('https://europe.webchat.botframework.com/api/tokens', { method: 'POST' });
       const { token } = await res.json();
-
+  
+      const store = window.WebChat.createStore();
+  
       window.WebChat.renderWebChat(
         {
-          directLine: window.WebChat.createDirectLine({ secret: 'r44Hw8495k0.P6cPwNzCecp8_RttRFSuBsygBn9I5u7c_61FAGFqRFE' })
+          directLine: window.WebChat.createDirectLine({ secret: 'r44Hw8495k0.P6cPwNzCecp8_RttRFSuBsygBn9I5u7c_61FAGFqRFE' }),
+          store
         },
         document.getElementById('webchat')
       );
-
+  
       document.querySelector('#webchat > *').focus();
+  
+      // Create a custom input box
+      const inputBox = document.createElement('input');
+      inputBox.type = 'text';
+      inputBox.id = 'customInputBox';
+      document.body.appendChild(inputBox);
+  
+      // Handle the Enter key press event
+      inputBox.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          // When Enter key is pressed, send the message with %% wrapped around it
+          store.dispatch({
+            type: 'WEB_CHAT/SEND_MESSAGE',
+            payload: { text: `%${event.target.value}%` }
+          });
+  
+          // Clear the input box
+          event.target.value = '';
+        }
+      });
     })().catch(err => console.error(err));
   </script>
 </body>

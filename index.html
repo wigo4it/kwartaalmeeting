@@ -1,12 +1,71 @@
-<html>
+<!DOCTYPE html>
+<html lang="en-US">
+
 <head>
-  <title>
-    TattaTeun
-  </title>
+  <title>tattaTeun</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
 </head>
+<script crossorigin="anonymous"
+  src="https://cdn.botframework.com/botframework-webchat/latest/webchat-minimal.js"></script>  
+<style>
+  html,
+
+  body {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  #webchat {
+    height: 90%;
+    width: 100%;
+  }
+
+  img {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
+  p {
+    font-family: 'Raleway', sans-serif;
+    /* replace with your preferred font */
+    font-weight: bold;
+    font-size: 16PX;
+    color: #00116e;
+    margin-top: 55px;
+    margin-left: 25px;
+  }
+
+  /* rest of your styles */
+</style>
+
+</style>
+</head>
+
 <body>
-  <iframe
-    src='https://webchat.botframework.com/embed/lang-099-jp-bot?s=r44Hw8495k0.P6cPwNzCecp8_RttRFSuBsygBn9I5u7c_61FAGFqRFE'
-    style='min-width: 400px; width: 100%; min-height: 500px;'></iframe>
+  <img src="logo.png" alt="Logo" width="200" />
+
+  <div id="webchat" role="main"></div>
+  <script>
+    (async function () {
+      
+      const res = await fetch('https://europe.webchat.botframework.com/api/tokens', { method: 'POST' });
+      const { token } = await res.json();
+
+      window.WebChat.renderWebChat(
+        {
+          directLine: window.WebChat.createDirectLine({ secret: 'r44Hw8495k0.P6cPwNzCecp8_RttRFSuBsygBn9I5u7c_61FAGFqRFE' })
+        },
+        document.getElementById('webchat')
+      );
+
+      document.querySelector('#webchat > *').focus();
+    })().catch(err => console.error(err));
+  </script>
 </body>
+
 </html>

@@ -1,22 +1,12 @@
-<!DOCTYPE html>
 <html>
+<head>
+  <title>
+    TattaTeun
+  </title>
+</head>
 <body>
-  <iframe id="chat" style="width: 400px; height: 400px;" src=''></iframe>
+  <iframe
+    src='https://webchat.botframework.com/embed/lang-099-jp-bot?s=r44Hw8495k0.P6cPwNzCecp8_RttRFSuBsygBn9I5u7c_61FAGFqRFE'
+    style='min-width: 400px; width: 100%; min-height: 500px;'></iframe>
 </body>
-<script>
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://webchat.botframework.com/api/tokens", true);
-    xhr.setRequestHeader('Authorization', 'BotConnector ' + 'r44Hw8495k0.P6cPwNzCecp8_RttRFSuBsygBn9I5u7c_61FAGFqRFE');
-    xhr.send();
-    xhr.onreadystatechange = processRequest;
-
-    function processRequest(e) {
-      if (xhr.readyState == 4  && xhr.status == 200) {
-        var response = JSON.parse(xhr.responseText);
-        document.getElementById("chat").src="https://webchat.botframework.com/embed/<botname>?t="+response
-      }
-    }
-
-  </script>
 </html>

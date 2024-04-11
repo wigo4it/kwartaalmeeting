@@ -73,20 +73,13 @@
             document.querySelector('#webchat > *').focus();
 
             // Create a custom input box
-            const inputBox = document.createElement('textarea');
+            const inputBox = document.createElement('input');
+            inputBox.type = 'text';
             inputBox.id = 'customInputBox';
-            inputBox.style.width = '450px'; // Set the width
-            inputBox.style.height = 'auto'; // Set the height to auto
-            inputBox.style.overflow = 'hidden'; // Hide the overflow
-            inputBox.style.resize = 'none'; // Disable manual resize
+            inputBox.style.width = 'auto'; // Set the width
+            inputBox.style.height = '30px'; // Set the height
             inputBox.style.marginLeft = '20px'; // Move the box to the right
             document.body.appendChild(inputBox);
-
-            // Adjust the height of the input box based on its content
-            inputBox.addEventListener('input', function (event) {
-                this.style.height = 'auto';
-                this.style.height = (this.scrollHeight) + 'px';
-            });
 
             // Handle the Enter key press event
             inputBox.addEventListener('keydown', function (event) {
@@ -119,10 +112,33 @@
                     });
 
                     // Clear the input box
-                    this.value = '';
-                    this.style.height = 'auto'; // Reset the height
+                    event.target.value = '';
                 }
             });
+
+            // Create a send button
+            const sendButton = document.createElement('button');
+            sendButton.id = 'customSendButton';
+            sendButton.textContent = 'Vraag tattaTeun';
+            sendButton.style.marginLeft = '10px'; // Move the button to the right
+            document.body.appendChild(sendButton);
+
+            // Handle the click event
+            sendButton.addEventListener('click', function () {
+                let inputText = inputBox.value;
+
+                // ... rest of your code ...
+
+                // When the button is clicked, send the message
+                store.dispatch({
+                    type: 'WEB_CHAT/SEND_MESSAGE',
+                    payload: { text: `%${inputText}%` } // Use inputText here instead of event.target.value
+                });
+
+                // Clear the input box
+                inputBox.value = '';
+            });
+
         })().catch(err => console.error(err));
     </script>
 </body>

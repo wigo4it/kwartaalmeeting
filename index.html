@@ -63,8 +63,9 @@
                     directLine: window.WebChat.createDirectLine({ secret: 'r44Hw8495k0.P6cPwNzCecp8_RttRFSuBsygBn9I5u7c_61FAGFqRFE' }),
                     store,
                     styleOptions: {
-                        hideUploadButton: true // Hide the upload button
-                        }
+                        hideUploadButton: true, // Hide the upload button
+                        hideSendBox: true // Hide the send box
+                    }
                 },
                 document.getElementById('webchat')
             );
@@ -72,13 +73,20 @@
             document.querySelector('#webchat > *').focus();
 
             // Create a custom input box
-            const inputBox = document.createElement('input');
-            inputBox.type = 'text';
+            const inputBox = document.createElement('textarea');
             inputBox.id = 'customInputBox';
             inputBox.style.width = '450px'; // Set the width
-            inputBox.style.height = '30px'; // Set the height
+            inputBox.style.height = 'auto'; // Set the height to auto
+            inputBox.style.overflow = 'hidden'; // Hide the overflow
+            inputBox.style.resize = 'none'; // Disable manual resize
             inputBox.style.marginLeft = '20px'; // Move the box to the right
             document.body.appendChild(inputBox);
+
+            // Adjust the height of the input box based on its content
+            inputBox.addEventListener('input', function (event) {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
 
             // Handle the Enter key press event
             inputBox.addEventListener('keydown', function (event) {
@@ -91,17 +99,17 @@
                     }
                     // If the input text is "baseline"
                     if (inputText.toLowerCase() === 'baseline') {
-                        inputText = '#SterkeBasis';
+                        inputText = '#BasisLol';
                     }
 
                     // If the input text is "functionaliteit"
                     if (inputText.toLowerCase() === 'functionaliteit') {
-                        inputText = '#BesteProduct';
+                        inputText = '#FeatureFeestje';
                     }
 
                     // If the input text is "performance"
                     if (inputText.toLowerCase() === 'vitaliteit') {
-                        inputText = '#BeTheLimit';
+                        inputText = '#FitheidFiesta';
                     }
 
                     // When Enter key is pressed, send the message with %% wrapped around it
@@ -111,7 +119,8 @@
                     });
 
                     // Clear the input box
-                    event.target.value = '';
+                    this.value = '';
+                    this.style.height = 'auto'; // Reset the height
                 }
             });
         })().catch(err => console.error(err));

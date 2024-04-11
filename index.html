@@ -76,45 +76,12 @@
             const inputBox = document.createElement('input');
             inputBox.type = 'text';
             inputBox.id = 'customInputBox';
-            inputBox.style.width = 'auto'; // Set the width
+            inputBox.style.width = 'auto%'; // Set the width
             inputBox.style.height = '30px'; // Set the height
             inputBox.style.marginLeft = '20px'; // Move the box to the right
+            inputBox.style.marginBottom = '20px';; // Move the box to the bottom
             document.body.appendChild(inputBox);
 
-            // Handle the Enter key press event
-            inputBox.addEventListener('keydown', function (event) {
-                if (event.key === 'Enter') {
-                    let inputText = event.target.value;
-
-                    // If the input text is "performance"
-                    if (inputText.toLowerCase() === 'performance') {
-                        inputText = '#SnelSnellerSnelst';
-                    }
-                    // If the input text is "baseline"
-                    if (inputText.toLowerCase() === 'baseline') {
-                        inputText = '#BasisLol';
-                    }
-
-                    // If the input text is "functionaliteit"
-                    if (inputText.toLowerCase() === 'functionaliteit') {
-                        inputText = '#FeatureFeestje';
-                    }
-
-                    // If the input text is "performance"
-                    if (inputText.toLowerCase() === 'vitaliteit') {
-                        inputText = '#FitheidFiesta';
-                    }
-
-                    // When Enter key is pressed, send the message with %% wrapped around it
-                    store.dispatch({
-                        type: 'WEB_CHAT/SEND_MESSAGE',
-                        payload: { text: `%${inputText}%` } // Use inputText here instead of event.target.value
-                    });
-
-                    // Clear the input box
-                    event.target.value = '';
-                }
-            });
 
             // Create a send button
             const sendButton = document.createElement('button');
@@ -123,11 +90,28 @@
             sendButton.style.marginLeft = '10px'; // Move the button to the right
             document.body.appendChild(sendButton);
 
-            // Handle the click event
-            sendButton.addEventListener('click', function () {
+            // Function to handle sending the message
+            function sendMessage() {
                 let inputText = inputBox.value;
 
-                // ... rest of your code ...
+                // If the input text is "performance"
+                if (inputText.toLowerCase() === 'performance') {
+                    inputText = '#SnelSnellerSnelst';
+                }
+                // If the input text is "baseline"
+                if (inputText.toLowerCase() === 'baseline') {
+                    inputText = '#SterkeBasis';
+                }
+
+                // If the input text is "functionaliteit"
+                if (inputText.toLowerCase() === 'functionaliteit') {
+                    inputText = '#BesteProduct';
+                }
+
+                // If the input text is "vitaliteit"
+                if (inputText.toLowerCase() === 'vitaliteit') {
+                    inputText = '#BeTheLimit';
+                }
 
                 // When the button is clicked, send the message
                 store.dispatch({
@@ -137,7 +121,18 @@
 
                 // Clear the input box
                 inputBox.value = '';
+            }
+
+            // Handle the Enter key press event
+            inputBox.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent the default action (new line)
+                    sendMessage(); // Call the sendMessage function
+                }
             });
+
+            // Handle the click event
+            sendButton.addEventListener('click', sendMessage); // Call the sendMessage function
 
         })().catch(err => console.error(err));
     </script>

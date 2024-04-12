@@ -17,7 +17,10 @@
     }
 
     body {
-        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
     }
 
     #webchat {
@@ -79,7 +82,7 @@
             inputBox.style.width = 'auto%'; // Set the width
             inputBox.style.height = '30px'; // Set the height
             inputBox.style.marginLeft = '20px'; // Move the box to the right
-            inputBox.style.marginBottom = '20px';; // Move the box to the bottom
+            inputBox.style.marginBottom = '5vh'; // Move the box to the bottom
             document.body.appendChild(inputBox);
 
 
@@ -93,6 +96,9 @@
             // Function to handle sending the message
             function sendMessage() {
                 let inputText = inputBox.value;
+
+                // Remove spaces
+                inputText = inputText.replace(/\s+/g, '');
 
                 // If the input text is "performance"
                 if (inputText.toLowerCase() === 'performance') {

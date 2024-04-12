@@ -13,11 +13,7 @@
     html,
 
     body {
-        height: 100%;
-    }
-
-    body {
-        min-height: 100vh;
+        min-height: 98vh;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -75,23 +71,29 @@
 
             document.querySelector('#webchat > *').focus();
 
+            // Create a container for the input box and the send button
+            const container = document.createElement('div');
+            container.style.display = 'flex';
+            container.style.justifyContent = 'flex-start'; // Align the children to the start (left)
+            container.style.alignItems = 'center';
+            container.style.marginBottom = '2vh'; // Move the container to the bottom
+            document.body.appendChild(container);
+
             // Create a custom input box
             const inputBox = document.createElement('input');
             inputBox.type = 'text';
             inputBox.id = 'customInputBox';
-            inputBox.style.width = 'auto%'; // Set the width
-            inputBox.style.height = '30px'; // Set the height
-            inputBox.style.marginLeft = '20px'; // Move the box to the right
-            inputBox.style.marginBottom = '5vh'; // Move the box to the bottom
-            document.body.appendChild(inputBox);
-
+            inputBox.style.width = '20vh'; // Set the width
+            inputBox.style.height = '2vh'; // Set the height
+            inputBox.style.marginLeft = '2vh'; // Move the box to the right
+            container.appendChild(inputBox); // Append the input box to the container
 
             // Create a send button
             const sendButton = document.createElement('button');
             sendButton.id = 'customSendButton';
             sendButton.textContent = 'Vraag tattaTeun';
             sendButton.style.marginLeft = '10px'; // Move the button to the right
-            document.body.appendChild(sendButton);
+            container.appendChild(sendButton); // Append the send button to the container
 
             // Function to handle sending the message
             function sendMessage() {

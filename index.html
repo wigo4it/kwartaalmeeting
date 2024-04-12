@@ -97,10 +97,16 @@
                 // Remove spaces
                 inputText = inputText.replace(/\s+/g, '');
 
+                // If the input text is "start"
+                if (inputText.toLowerCase() === 'start') {
+                    inputText = '#Begin';
+                }
+                
                 // If the input text is "performance"
                 if (inputText.toLowerCase() === 'performance') {
                     inputText = '#SnelSnellerSnelst';
                 }
+                
                 // If the input text is "baseline"
                 if (inputText.toLowerCase() === 'baseline') {
                     inputText = '#SterkeBasis';
